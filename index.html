@@ -29,6 +29,7 @@
 <div id="map"></div>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 	<script>
 		//var map = L.map('map').setView([46.72, -94.68], 6);
@@ -48,6 +49,22 @@
 			maxZoom: 20,
 			ext: 'png'
 		}).addTo(map);
+
+		
+		//Add sample geojson layer
+		var geojsonSample = L.geoJson(null, {
+			  onEachFeature: function (feature, layer) {
+				  	//Pop-up display
+				    var html = '';
+				    if (feature.properties.NAME) {
+				      html += '<h3>' + feature.properties.NAME + '</h3>';
+				    }
+				    layer.bindPopup(html);
+			  }
+		});
+		$.getJSON("data/sampleData.json", function (data) {
+			  geojsonSample.addData(data).addTo(map);
+		});
 		
 	</script>
 
