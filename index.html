@@ -32,14 +32,17 @@
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 	<script>
-		//var map = L.map('map').setView([46.72, -94.68], 6);
+		
+		var southWest = L.latLng(43.355, -97.700),
+	    	northEast = L.latLng(49.781, -89.338),
+	    	bounds = L.latLngBounds(southWest, northEast);
 		
 		var map = L.map('map', {
 			center: [46.72, -94.68],
 			zoom: 6,
 			minZoom: 6,
 			maxZoom: 12,
-			dragging: false
+			maxBounds: bounds
 		})
 
 		var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
@@ -49,6 +52,11 @@
 			maxZoom: 20,
 			ext: 'png'
 		}).addTo(map);
+		
+		map.fitBounds([
+			[43.355, -97.700],
+			[49.781, -89.338]
+		]);
 
 		
 		//Add sample geojson layer
