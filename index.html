@@ -28,51 +28,66 @@
 
 <div id="map"></div>
 
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 
 	<script>
+	
+	var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		subdomains: 'abcd',
+		minZoom: 6,
+		maxZoom: 9,
+		ext: 'png'
+	});
+	
+	var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+		minZoom: 9,
+		maxZoom: 12,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	});
+	
+	//Add sample geojson layer
+	var geojsonSample = L.geoJson(null, {
+		onEachFeature: function (feature, layer) {
+			//Pop-up display
+			var html = '';
+			if (feature.properties.NAME) {
+				html += '<h3>' + feature.properties.NAME + '</h3>';
+			}
+			layer.bindPopup(html);
+		}
+	});
+	$.getJSON("data/sampleData.json", function (data) {
+		  geojsonSample.addData(data);
+	});
 		
-		var southWest = L.latLng(43.355, -97.700),
-	    	northEast = L.latLng(49.781, -89.338),
-	    	bounds = L.latLngBounds(southWest, northEast);
+	var southWest = L.latLng(43.355, -97.700),
+		northEast = L.latLng(49.781, -89.338),
+		bounds = L.latLngBounds(southWest, northEast);
 		
-		var map = L.map('map', {
-			center: [46.72, -94.68],
-			zoom: 6,
-			minZoom: 6,
-			maxZoom: 12,
-			maxBounds: bounds
-		})
+	var map = L.map('map', {
+		center: [46.72, -94.68],
+		zoom: 6,
+		minZoom: 6,
+		maxZoom: 12,
+		maxBounds: bounds,
+		layers: [Stamen_TonerLite, OpenStreetMap_BlackAndWhite, geojsonSample]
+	})	
 
-		var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-			subdomains: 'abcd',
-			minZoom: 0,
-			maxZoom: 20,
-			ext: 'png'
-		}).addTo(map);
-		
-		map.fitBounds([
-			[43.355, -97.700],
-			[49.781, -89.338]
-		]);
+	var baseMaps = {
+	};
 
-		
-		//Add sample geojson layer
-		var geojsonSample = L.geoJson(null, {
-			  onEachFeature: function (feature, layer) {
-				  	//Pop-up display
-				    var html = '';
-				    if (feature.properties.NAME) {
-				      html += '<h3>' + feature.properties.NAME + '</h3>';
-				    }
-				    layer.bindPopup(html);
-			  }
-		});
-		$.getJSON("data/sampleData.json", function (data) {
-			  geojsonSample.addData(data).addTo(map);
-		});
+	var overlayMaps = {
+    	"Counties": geojsonSample
+	};
+	
+	map.fitBounds([
+		[43.355, -97.700],
+		[49.781, -89.338]
+	]);
+	
+	L.control.layers(baseMaps, overlayMaps).addTo(map);
 		
 	</script>
 
