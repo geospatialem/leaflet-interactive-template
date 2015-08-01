@@ -61,6 +61,18 @@
 	$.getJSON("data/sampleData.json", function (data) {
 		  geojsonSample.addData(data);
 	});
+	
+	//Set the forestryImage to Minnesota's bounds
+	var forestryImage = 'data/forestData.png',
+		//TODO: Fix the bounds to more accurately represent the forestData.png coordinates
+		forestryBounds = L.latLngBounds([
+    		[43.4993610, -97.2391958],
+			[49.3828204, -89.4918334]
+    ]);
+	
+	//Set the forestOverlay to the forestry image with the bounding box defined above
+	var forestOverlay = L.imageOverlay(forestryImage, forestryBounds);
+	
 		
 	var southWest = L.latLng(43.355, -97.700),
 		northEast = L.latLng(49.781, -89.338),
@@ -72,14 +84,15 @@
 		minZoom: 6,
 		maxZoom: 12,
 		maxBounds: bounds,
-		layers: [Stamen_TonerLite, OpenStreetMap_BlackAndWhite, geojsonSample]
+		layers: [Stamen_TonerLite, OpenStreetMap_BlackAndWhite, geojsonSample, forestOverlay]
 	})	
 
 	var baseMaps = {
 	};
 
 	var overlayMaps = {
-    	"Counties": geojsonSample
+    	"Counties": geojsonSample,
+    	"Forest": forestOverlay
 	};
 	
 	map.fitBounds([
