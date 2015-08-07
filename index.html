@@ -100,7 +100,16 @@
 		[49.781, -89.338]
 	]);
 	
-	L.control.layers(baseMaps, overlayMaps).addTo(map);
+	/* Larger screens get expanded layer control */
+	if (document.body.clientWidth <= 767) {
+	  isCollapsed = true;
+	} else {
+	  isCollapsed = false;
+	}
+	
+	L.control.layers(baseMaps, overlayMaps, {
+		collapsed.isCollapsed
+	}).addTo(map);
 		
 	</script>
 
