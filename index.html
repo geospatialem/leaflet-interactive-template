@@ -33,18 +33,18 @@
 
 	<script>
 	
-	var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
-		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-		subdomains: 'abcd',
+	var esriGray = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 		minZoom: 6,
-		maxZoom: 9,
-		ext: 'png'
+		maxZoom: 8,
+		zIndex: 1
 	});
 	
-	var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+	var esriTopo = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
 		minZoom: 9,
 		maxZoom: 12,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+		zIndex: 0
 	});
 	
 	//Add sample geojson layer
@@ -84,7 +84,7 @@
 		minZoom: 6,
 		maxZoom: 12,
 		maxBounds: bounds,
-		layers: [Stamen_TonerLite, OpenStreetMap_BlackAndWhite, geojsonSample, forestOverlay]
+		layers: [esriGray, esriTopo, geojsonSample, forestOverlay]
 	})	
 
 	var baseMaps = {
