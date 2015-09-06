@@ -47,12 +47,15 @@
 		zIndex: 2
 	});
 	
-	var esriTopo = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	var mapquestOSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
 		minZoom: 9,
 		maxZoom: 12,
-		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+		type: 'map',
+		ext: 'jpg',
+		attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		subdomains: '1234',
 		//zIndex: 0
-	});
+});
 	
 	//Add sample geojson layer
 	var geojsonSample = L.geoJson(null, {
@@ -91,7 +94,7 @@
 		minZoom: 6,
 		maxZoom: 12,
 		maxBounds: bounds,
-		layers: [esriGray, esriGrayRef, esriTopo, geojsonSample, forestOverlay]
+		layers: [esriGray, esriGrayRef, mapquestOSM, geojsonSample, forestOverlay]
 	})	
 
 	var baseMaps = {
