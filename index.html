@@ -40,6 +40,13 @@
 		zIndex: 1
 	});
 	
+	var esriGrayRef = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/servicesCanvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+		minZoom: 6,
+		maxZoom: 8,
+		zIndex: 2
+	});
+	
 	var esriTopo = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
 		minZoom: 9,
 		maxZoom: 12,
@@ -84,7 +91,7 @@
 		minZoom: 6,
 		maxZoom: 12,
 		maxBounds: bounds,
-		layers: [esriGray, esriTopo, geojsonSample, forestOverlay]
+		layers: [esriGray, esriGrayRef, esriTopo, geojsonSample, forestOverlay]
 	})	
 
 	var baseMaps = {
