@@ -10,7 +10,7 @@
     <meta name="description" content="Leaflet Interactive Template">
     <meta name="author" content="Kitty Hurley">
     
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.1/leaflet.css" />
     
     <style>
 		body {
@@ -29,31 +29,31 @@
 
 <div id="map"></div>
 
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.1/leaflet.js"></script>
 
 	<script>
 	
-	var esriGray = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	var esriGray = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
 		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 		minZoom: 6,
 		maxZoom: 8,
 		zIndex: 1
 	});
 	
-	var esriGrayRef = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+	var esriGrayRef = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
 		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 		minZoom: 6,
 		maxZoom: 8,
 		zIndex: 2
 	});
 	
-	var mapquestOSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+	var mapquestOSM = L.tileLayer('https://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
 		minZoom: 9,
 		maxZoom: 12,
 		type: 'map',
 		ext: 'jpg',
-		attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		attribution: 'Tiles Courtesy of <a href="https://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		subdomains: '1234',
 		zIndex: 0
 });
